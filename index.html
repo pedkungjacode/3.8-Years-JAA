@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080B1A">
+  <title>Our Little Universe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- พื้นหลังท้องฟ้า (สร้างดาวด้วย script.js) -->
+  <div id="sky" aria-hidden="true">
+    <div class="nebula n1"></div>
+    <div class="nebula n2"></div>
+    <div id="stars"></div>
+    <div class="shoot s1"></div>
+    <div class="shoot s2"></div>
+  </div>
+
+  <main>
+    <!-- ฉาก 1: intro -->
+    <section class="scene" id="scene-intro" data-scene="intro" aria-labelledby="t-intro">
+      <div class="wrap center">
+        <h1 id="t-intro" class="title" tabindex="-1" data-bind="title"></h1>
+        <p class="lead" data-bind="introMessage"></p>
+        <p class="dates" id="intro-dates"></p>
+        <p class="duration" id="intro-duration"></p>
+        <button class="btn primary" data-go="map">ออกเดินทางกันเถอะ</button>
+      </div>
+    </section>
+
+    <!-- ฉาก 2: map -->
+    <section class="scene" id="scene-map" data-scene="map" aria-labelledby="t-map" hidden>
+      <div class="wrap center">
+        <h2 id="t-map" class="h2" tabindex="-1" data-bind="mapTitle"></h2>
+        <p class="lead" data-bind="mapMessage"></p>
+        <div class="skymap" id="skymap"></div>
+        <p class="progress" id="map-progress" aria-live="polite"></p>
+        <button class="btn ghost" data-go="intro">กลับไปหน้าแรก</button>
+      </div>
+    </section>
+
+    <!-- ฉาก 3: memories -->
+    <section class="scene" id="scene-memories" data-scene="memories" aria-labelledby="t-memories" hidden>
+      <div class="wrap center wide">
+        <h2 id="t-memories" class="h2" tabindex="-1" data-bind="memoriesTitle"></h2>
+        <p class="lead" data-bind="memoriesMessage"></p>
+        <div class="gallery" id="gallery"></div>
+        <button class="btn ghost" data-go="map">กลับไปแผนที่ดาว</button>
+      </div>
+    </section>
+
+    <!-- ฉาก 4: letter -->
+    <section class="scene" id="scene-letter" data-scene="letter" aria-labelledby="t-letter" hidden>
+      <div class="wrap">
+        <h2 id="t-letter" class="h2 center" tabindex="-1" data-bind="letterTitle"></h2>
+        <div id="letter-prep" class="center">
+          <p class="lead" data-bind="letterPrep"></p>
+          <button class="btn primary" id="open-letter">เปิดจดหมาย</button>
+        </div>
+        <article id="letter" class="letter" hidden>
+          <header class="l-head">
+            <p>TO: <span data-bind="recipientNameEn"></span></p>
+            <p id="l-from"></p>
+            <p id="l-date"></p>
+          </header>
+          <p class="l-intro rv" data-bind="letterIntro"></p>
+          <div id="l-body"></div>
+          <p class="l-sign rv" id="l-sign"></p>
+          <div class="center"><button class="btn ghost" id="skip-letter">อ่านจดหมายทั้งหมด</button></div>
+        </article>
+        <div class="center"><button class="btn ghost" data-go="map">กลับไปแผนที่ดาว</button></div>
+      </div>
+    </section>
+
+    <!-- ฉาก 5: ending -->
+    <section class="scene" id="scene-ending" data-scene="ending" aria-labelledby="t-ending" hidden>
+      <div class="wrap center">
+        <h2 id="t-ending" class="h2" tabindex="-1" data-bind="endingTitle"></h2>
+        <div id="end-body" class="end-body"></div>
+        <div class="row">
+          <button class="btn ghost" id="skip-end">แสดงข้อความทั้งหมด</button>
+          <button class="btn primary" data-go="map">กลับไปดูดาวของเราอีกครั้ง</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal ใช้ร่วมกัน: การ์ดดาวเริ่มต้นและรายละเอียดภาพ -->
+  <dialog id="modal" aria-labelledby="m-title">
+    <div class="m-card">
+      <div id="m-media"></div>
+      <h2 id="m-title"></h2>
+      <p class="m-date" id="m-date"></p>
+      <p id="m-text"></p>
+      <button class="btn primary" id="m-close">ปิด</button>
+    </div>
+  </dialog>
+
+  <noscript><p class="center" style="position:relative;padding:2rem">กรุณาเปิด JavaScript เพื่อเดินทางในจักรวาลเล็ก ๆ นี้</p></noscript>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+:root{
+  --bg:#080B1A; --bg2:#11132B; --blue:#172344; --purple:#62547F; --violet:#9584C8;
+  --star:#F4EBD8; --text:#F2F0FA; --text2:#B9BDD5;
+  --sans:"Sarabun","Noto Sans Thai","Leelawadee UI","Thonburi",system-ui,sans-serif;
+  --serif:Georgia,"Noto Serif Thai","Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:1.0625rem;line-height:1.8;overflow:hidden}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+
+/* ---------- ท้องฟ้า ---------- */
+#sky{position:fixed;inset:0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 60%,var(--blue) 130%);z-index:0}
+.nebula{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;transition:opacity 3s;animation:drift 40s ease-in-out infinite alternate}
+.n1{width:70vmax;height:70vmax;left:-20vmax;top:-25vmax;background:radial-gradient(circle,rgba(98,84,127,.7),transparent 65%)}
+.n2{width:60vmax;height:60vmax;right:-20vmax;bottom:-25vmax;background:radial-gradient(circle,rgba(23,35,68,.95),rgba(149,132,200,.25) 45%,transparent 70%);animation-duration:55s}
+@keyframes drift{to{transform:translate(4vmax,3vmax) scale(1.08)}}
+#stars{position:absolute;inset:0;transition:filter 3s,opacity 3s}
+#stars span{position:absolute;border-radius:50%;background:var(--star);opacity:.5}
+#stars span.tw{animation:twinkle 5s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.95;transform:scale(1.5)}}
+.shoot{position:absolute;width:110px;height:1.5px;top:12%;left:-15%;opacity:0;background:linear-gradient(90deg,transparent,var(--star));transform:rotate(25deg);animation:shoot 19s linear infinite}
+.shoot.s2{top:40%;animation-delay:-9s;animation-duration:27s}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(25deg)}2%{opacity:.9}8%{opacity:0;transform:translate(60vw,28vw) rotate(25deg)}100%{opacity:0}}
+body.glow .nebula{opacity:.9}
+body.glow #stars{filter:brightness(1.7)}
+
+/* ---------- ฉาก ---------- */
+main{position:relative;z-index:1}
+.scene{position:fixed;inset:0;height:100vh;height:100svh;overflow-y:auto;display:flex;padding:max(24px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom))}
+.scene.on{animation:fade 1s both}
+@keyframes fade{from{opacity:0}}
+.wrap{margin:auto;width:100%;max-width:640px}
+.wrap.wide{max-width:960px}
+.center{text-align:center}
+.scene.on .wrap>*{animation:rise 1.2s both}
+.scene.on .wrap>:nth-child(2){animation-delay:.3s}
+.scene.on .wrap>:nth-child(3){animation-delay:.6s}
+.scene.on .wrap>:nth-child(4){animation-delay:.9s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+:focus-visible{outline:2px solid var(--star);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+
+.title{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,8.5vw,3.6rem);line-height:1.15;letter-spacing:.16em;text-transform:uppercase;margin:0 0 1.4rem;text-shadow:0 0 28px rgba(149,132,200,.6)}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,5.5vw,2rem);line-height:1.4;margin:0 0 .8rem}
+.lead{color:var(--text2);white-space:pre-line;margin:0 auto 1.4rem;max-width:34em}
+.dates{font-family:var(--serif);letter-spacing:.12em;color:var(--star);font-size:.95rem;margin:1.6rem 0 .2rem}
+.duration{font-size:1.5rem;margin:0 0 2rem;color:var(--text)}
+.progress{color:var(--text2);font-size:.95rem;margin:.4rem 0 1rem}
+
+/* ---------- ปุ่ม ---------- */
+.btn{min-height:46px;padding:.55rem 1.6rem;border-radius:999px;cursor:pointer;border:1px solid var(--violet);background:rgba(23,35,68,.55);transition:box-shadow .25s,background .25s,transform .15s}
+.btn:hover{background:rgba(98,84,127,.55);box-shadow:0 0 22px rgba(149,132,200,.45)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:linear-gradient(135deg,var(--purple),var(--blue));border-color:var(--violet);box-shadow:0 0 18px rgba(149,132,200,.3)}
+.btn.ghost{border-color:rgba(185,189,213,.35);color:var(--text2);margin-top:.6rem}
+.row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+
+/* ---------- แผนที่ดาว ---------- */
+.skymap{position:relative;width:100%;height:min(58vh,520px);height:min(58svh,520px);margin:0 auto .6rem;border:1px solid rgba(149,132,200,.18);border-radius:22px;background:radial-gradient(ellipse at 50% 40%,rgba(23,35,68,.5),transparent 75%)}
+.star{position:absolute;width:116px;transform:translate(-50%,-22px);background:none;border:0;padding:0;cursor:pointer;text-align:center;line-height:1.35}
+.dot{display:block;width:44px;height:44px;margin:0 auto;position:relative}
+.dot::before{content:"";position:absolute;inset:14px;border-radius:50%;background:var(--star);box-shadow:0 0 14px 4px rgba(244,235,216,.55);animation:twinkle 4s ease-in-out infinite;transition:box-shadow .3s,inset .3s}
+.star:hover .dot::before,.star:focus-visible .dot::before{inset:11px;box-shadow:0 0 26px 10px rgba(244,235,216,.7)}
+.star .name{display:block;font-size:.92rem}
+.star .sub{display:block;font-size:.78rem;color:var(--text2)}
+.star.seen .dot::before{background:var(--violet);box-shadow:0 0 16px 5px rgba(149,132,200,.65)}
+.star.seen .sub{color:var(--star)}
+
+/* ---------- แกลเลอรี ---------- */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin:0 0 1.2rem}
+.mem{background:rgba(17,19,43,.7);border:1px solid rgba(149,132,200,.25);border-radius:16px;padding:8px;cursor:pointer;text-align:left;transition:transform .3s,box-shadow .3s}
+.mem:hover,.mem:focus-visible{transform:scale(1.04);box-shadow:0 0 24px rgba(149,132,200,.4)}
+.mem .c-title{display:block;margin:.5rem .3rem 0;font-size:.95rem;line-height:1.4}
+.mem .c-date{display:block;margin:0 .3rem .2rem;font-size:.8rem;color:var(--text2)}
+.frame{aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:var(--blue)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;color:var(--text2);font-size:.8rem;line-height:1.5;word-break:break-all;border:1px dashed var(--purple);border-radius:10px;background:radial-gradient(circle at 50% 35%,rgba(98,84,127,.4),transparent 70%)}
+
+/* ---------- จดหมาย ---------- */
+.letter{margin:1rem 0;padding:clamp(20px,5vw,40px);border-radius:22px;background:rgba(17,19,43,.78);border:1px solid rgba(149,132,200,.35);box-shadow:0 0 60px rgba(149,132,200,.25);text-align:left}
+.l-head{font-family:var(--serif);letter-spacing:.1em;font-size:.9rem;color:var(--star);margin-bottom:1.2rem;border-bottom:1px solid rgba(149,132,200,.25)}
+.l-head p{margin:0 0 .2rem}
+.l-intro{color:var(--text2);font-style:italic;margin:0 0 1.2rem}
+#l-body p,.l-sign{margin:0 0 1rem}
+.l-sign{text-align:right;color:var(--star)}
+.rv{opacity:0;transform:translateY(6px);transition:opacity 1s,transform 1s}
+.rv.shown{opacity:1;transform:none}
+
+/* ---------- ตอนจบ ---------- */
+.end-body p{margin:0 auto 1.1rem;max-width:30em}
+.end-body p:last-child{font-family:var(--serif);font-size:1.2rem;color:var(--star);margin-top:1.6rem}
+
+/* ---------- Modal ---------- */
+dialog{border:0;padding:0;background:transparent;color:var(--text);width:min(92vw,460px);max-height:90vh;max-height:90svh;overflow:auto}
+dialog::backdrop{background:rgba(8,11,26,.82)}
+.m-card{padding:20px;border-radius:20px;background:var(--bg2);border:1px solid var(--violet);box-shadow:0 0 50px rgba(149,132,200,.4);text-align:center}
+.m-card .frame{max-height:55vh;margin-bottom:1rem}
+.m-card h2{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin:.2rem 0}
+.m-date{color:var(--star);margin:0 0 .6rem;font-size:.95rem}
+#m-text{color:var(--text2);margin:0 0 1.2rem}
+dialog[open]{animation:fade .35s both}
+
+@media (min-width:900px){.skymap{height:min(60vh,540px)}.star{width:150px}.star .name{font-size:1rem}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .shoot{display:none}
+}
